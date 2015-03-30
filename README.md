@@ -1,4 +1,4 @@
-tracker-api
+deltedelete-api
 ===========
 
-API for the activity tracker!
+API for DeleteDelete apps
