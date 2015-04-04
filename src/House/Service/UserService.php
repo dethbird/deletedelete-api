@@ -71,6 +71,21 @@ class UserService extends BaseService
         return $this->response;
     }
 
+    public function update($id, $params)
+    {
+
+        $user = User::find($id);
+        try {
+            $user->update_attributes($params);
+        }
+        catch (Exception $e) {
+            print_r($e);
+        }
+        $this->response->setData($user->to_array());
+        return $this->response;
+
+    }
+
     /**
     * INSTAGRAM
     */

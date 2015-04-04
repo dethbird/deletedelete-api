@@ -92,10 +92,11 @@
     */
     $authenticate = function($app) 
     {
-        return function () use ( $app ) 
+
+        global $user;
+
+        return function () use ( $app, $user ) 
         {
-            global $user;
-            
             $request = $app->request;
 
             $service = new UserService();
@@ -106,6 +107,7 @@
                 $app->stop();
             } else {
                 $user = $response->getData();
+                // Logger::log($user);
             }
         };
     };
@@ -127,6 +129,19 @@
         //return user
         $app->response->setBody(json_encode($response));
 
+
+    });
+
+    $app->post('/write', $authenticate($app), function () use ($app, $user) {
+        
+        $service = new UserService();
+        $response = $service->findByAuthToken($app->request->headers('Auth-Token'));
+        $user = $response->getData();
+
+        $response = $service->update($user['id'], $app->request->params());
+
+        //return user
+        $app->response->setBody(json_encode($response));
 
     });
 
