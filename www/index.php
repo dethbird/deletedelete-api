@@ -72,8 +72,6 @@
     *         \/     \/   |__|                     \/     \/    
     */
     
-    require_once('House/Service/ActivityService.php');
-    require_once('House/Service/GoalService.php');
     require_once('House/Service/UserService.php');
     require_once('House/Service/Response/ServiceResponse.php');
 
